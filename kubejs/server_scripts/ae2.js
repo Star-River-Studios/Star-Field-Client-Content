@@ -1,0 +1,16 @@
+ServerEvents.recipes(event=>{
+    event.shaped('extendedae_plus:infinity_biginteger_cell',
+        [
+            'BCB',
+            'DAD',
+            'EEE'
+        ],
+        {
+            A:'ae2omnicells:quantum_omni_cell_256m',
+            B:'minecraft:nether_star',
+            C:'minecraft:dragon_head',
+            D:'minecraft:dragon_breath',
+            E:'ae2cs:purified_quantum_crystal'
+        }
+    )
+})

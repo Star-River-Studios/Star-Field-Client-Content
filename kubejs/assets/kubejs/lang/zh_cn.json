@@ -1,0 +1,18 @@
+{
+    "gas.kubejs.lpg":"石油气",
+    "gas.kubejs.amethyst_gas":"紫水晶增生汽液",
+    "gas.kubejs.nether_gas":"地狱原质",
+    "gas.kubejs.redstone_gas":"红石酸汽",
+    "gas.kubejs.amethyst_chemical":"油页杂质溶剂",
+    "gas.kubejs.bone_solvent_chemical":"融骨溶液",
+    "gas.kubejs.clean_bone_solvent_chemical":"含钙溶液",
+    "gas.kubejs.clean_amethyst_chemical":"含油质溶剂",
+    "fluid.kubejs.fiery_tears":"炽热之泪",
+    "fluid.kubejs.bone_solvent_fluid":"炽热之泪",
+    "fluid.kubejs.oily_solution_fluid":"炽热之泪",
+    "fluid.kubejs.alloy_infuser_fluid":"灌注合金添加剂",
+    "fluid.kubejs.amethyst_fluid":"紫水晶增生液",
+    "fluid.kubejs.nether_fluid":"地狱原浆",
+    "fluid.kubejs.fiery_blood":"炽热之血",
+    "block.kubejs.lpg_steel_casing":"油气浸洗机壳"
+}
