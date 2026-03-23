@@ -39,9 +39,9 @@ ServerEvents.recipes( event => {
         .weight(10)
         .failChance(0.1)
         .build(event, "nameless_mine_site")
-    event.recipes.immersiveengineering.refinery(Fluid.of('kubejs:alloy_infuser_fluid',100),200,Fluid.of('immersiveengineering:redstone_acid',50),'twilightforest:naga_scale',Fluid.of("kubejs:fiery_tears",250))//灌注剂制备
-    event.recipes.immersiveengineering.refinery(Fluid.of('kubejs:alloy_infuser_fluid',100),200,Fluid.of('immersiveengineering:redstone_acid',50),'twilightforest:naga_scale',Fluid.of("kubejs:fiery_blood",250))
-    event.recipes.immersiveengineering.refinery(Fluid.of('kubejs:alloy_infuser_fluid',100),200,Fluid.of('immersiveengineering:phenolic_resin',10),'minecraft:redstone')
+    //event.recipes.immersiveengineering.refinery(Fluid.of('kubejs:alloy_infuser_fluid',100),200,Fluid.of('immersiveengineering:redstone_acid',50),'twilightforest:naga_scale',Fluid.of("kubejs:fiery_tears",250))//灌注剂制备
+    //event.recipes.immersiveengineering.refinery(Fluid.of('kubejs:alloy_infuser_fluid',100),200,Fluid.of('immersiveengineering:redstone_acid',50),'twilightforest:naga_scale',Fluid.of("kubejs:fiery_blood",250))
+    //event.recipes.immersiveengineering.refinery(Fluid.of('kubejs:alloy_infuser_fluid',100),200,Fluid.of('immersiveengineering:phenolic_resin',10),'minecraft:redstone')
     event.remove(['immersiveengineering:crafting/light_engineering','immersiveengineering:crafting/heavy_engineering','immersiveengineering:crafting/rs_engineering'])
     event.recipes.create.compacting('4x immersiveengineering:light_engineering',['2x immersiveengineering:component_iron','2x immersiveengineering:sheetmetal_iron','minecraft:copper_ingot'])//工厂块制作
     event.recipes.create.compacting('4x immersiveengineering:rs_engineering',['2x minecraft:redstone','2x immersiveengineering:sheetmetal_iron','minecraft:copper_ingot'])
@@ -71,5 +71,131 @@ ServerEvents.recipes( event => {
         Fluid.of("kubejs:amethyst_fluid",250),
         TagOutputJS.ofItemStack("2x minecraft:amethyst_shard")
     )
+    let all_ore=[
+        'tin',
+        'lead',
+        'uranium',
+        'osmium',
+        'iron',
+        'gold',
+        'copper',
+        'nickel',
+        'silver',
+        'aluminum',
+        'zinc',
+        'tungsten'
+    ]
+    for(let i of all_ore){
+        event.remove('immersiveengineering:arcfurnace/ore_'+`${i}`)
+        event.remove('immersiveengineering:arcfurnace/raw_ore_'+`${i}`)
+        event.remove('immersiveengineering:arcfurnace/raw_block_'+`${i}`)
+    }
+    event.replaceOutput({output:'immersiveengineering:ingot_aluminum'},'immersiveengineering:ingot_aluminum','neoecoae:aluminum_ingot')
+    event.replaceInput({input:'immersiveengineering:ingot_aluminum'},'immersiveengineering:ingot_aluminum','neoecoae:aluminum_ingot')
+    event.recipes.immersiveengineering.crusher(
+        TagOutputJS.ofItemStack('4x mekanism_extras:nugget_naquadah'),
+        "kubejs:dirty_ore_powder",
+        1000,
+        [
+            StackWithChanceJS.of('powah:uraninite_raw', 0.3),
+            StackWithChanceJS.of('mekanism:raw_uranium', 0.5),
+            StackWithChanceJS.of('kubejs:ore_powder', 1)
+        ]
+    )
+    event.recipes.immersiveengineering.crusher(
+        TagOutputJS.ofItemStack('2x mekanism:raw_osmium'),
+        "kubejs:dirty_ore2_powder",
+        1000,
+        [
+            StackWithChanceJS.of('immersiveengineering:raw_nickel', 0.7),
+            StackWithChanceJS.of('immersiveengineering:raw_silver', 0.5),
+            StackWithChanceJS.of('kubejs:ore2_powder', 1)
+        ]
+    )
+    event.recipes.immersiveengineering.crusher(
+        TagOutputJS.ofItemStack('2x minecraft:raw_copper'),
+        "kubejs:dirty_ore1_powder",
+        1000,
+        [
+            StackWithChanceJS.of('minecraft:ancient_debris', 0.05),
+            StackWithChanceJS.of('create:raw_zinc', 0.5),
+            StackWithChanceJS.of('kubejs:ore1_powder', 1)
+        ]
+    )
+    function ore_arc_furnace(tag_input,tag_output,output_count){
+        event.custom(
+        {
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 102400,
+  "input": {
+    "tag": tag_input,
+    "count": 1
+  },
+  "results": [
+    {
+      "id": tag_output,
+      "count": output_count
+    }
+  ],
+  "secondaries": [
+    {
+      "chance": 0.75,
+      "output": {
+        "id": tag_output
+      }
+    }
+  ],
+  "slag": {
+    "tag": "c:slag"
+  },
+  "time": 50
+}
+    )
+    }
+    let minecraft_ore=[
+        'iron',
+        'gold',
+        'copper'
+    ]
+    let mek_ore=[
+        'tin',
+        'lead',
+        'uranium',
+        'osmium'
+    ]
+    let IE_ore=[
+        'silver',
+        'nickel'
+    ]
+    let NEO_ore=[
+        'aluminum',
+        'tungsten'
+    ]
+    for(let i of minecraft_ore){
+        ore_arc_furnace('c:storage_blocks/raw_'+`${i}`,'minecraft:'+`${i}`+'_ingot',33)
+        ore_arc_furnace('c:dirty_dusts/'+`${i}`,'minecraft:'+`${i}`+'_ingot',2)
+        ore_arc_furnace('c:raw_materials/'+`${i}`,'minecraft:'+`${i}`+'_ingot',3)
+        ore_arc_furnace('c:ores/'+`${i}`,'minecraft:'+`${i}`+'_ingot',5)
+    }
+    for(let i of mek_ore){
+        ore_arc_furnace('c:storage_blocks/raw_'+`${i}`,'mekanism:ingot_'+`${i}`,33)
+        ore_arc_furnace('c:dirty_dusts/'+`${i}`,'mekanism:ingot_'+`${i}`,2)
+        ore_arc_furnace('c:raw_materials/'+`${i}`,'mekanism:ingot_'+`${i}`,3)
+        ore_arc_furnace('c:ores/'+`${i}`,'mekanism:ingot_'+`${i}`,5)
+    }
+     for(let i of IE_ore){
+        ore_arc_furnace('c:storage_blocks/raw_'+`${i}`,'immersiveengineering:ingot_'+`${i}`,33)
+        ore_arc_furnace('c:raw_materials/'+`${i}`,'immersiveengineering:ingot_'+`${i}`,3)
+        ore_arc_furnace('c:ores/'+`${i}`,'immersiveengineering:ingot_'+`${i}`,5)
+    }
+     for(let i of NEO_ore){
+        ore_arc_furnace('c:storage_blocks/raw_'+`${i}`,'neoecoae:'+`${i}`+'_ingot',33)
+        ore_arc_furnace('c:raw_materials/'+`${i}`,'neoecoae:'+`${i}`+'_ingot',3)
+        ore_arc_furnace('c:ores/'+`${i}`,'neoecoae:'+`${i}`+'_ingot',5)
+     }
+    ore_arc_furnace('c:storage_blocks/raw_zinc','create:zinc_ingot',33)
+    ore_arc_furnace('c:raw_materials/zinc','create:zinc_ingot',3)
+    ore_arc_furnace('c:ores/zinc','create:zinc_ingot',5)
 })
 

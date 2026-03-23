@@ -1,4 +1,5 @@
 ServerEvents.recipes(event=>{
+    event.remove('extendedae_plus:infinity_biginteger_cell')
     event.shaped('extendedae_plus:infinity_biginteger_cell',
         [
             'BCB',

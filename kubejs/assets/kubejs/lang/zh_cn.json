@@ -10,9 +10,21 @@
     "fluid.kubejs.fiery_tears":"炽热之泪",
     "fluid.kubejs.bone_solvent_fluid":"炽热之泪",
     "fluid.kubejs.oily_solution_fluid":"炽热之泪",
-    "fluid.kubejs.alloy_infuser_fluid":"灌注合金添加剂",
+    "fluid.kubejs.redstone":"液态红石",
+    "fluid.kubejs.diamond":"液态钻石",
+    "fluid.kubejs.refined_obsidian":"液态强化黑曜石",
+    "fluid.kubejs.radiance":"液态辐光",
+    "fluid.kubejs.thermonuclear":"液态热核",
+    "fluid.kubejs.shining":"液态闪耀",
+    "fluid.kubejs.spectrum":"液态光谱",
     "fluid.kubejs.amethyst_fluid":"紫水晶增生液",
     "fluid.kubejs.nether_fluid":"地狱原浆",
     "fluid.kubejs.fiery_blood":"炽热之血",
-    "block.kubejs.lpg_steel_casing":"油气浸洗机壳"
+    "fluid.kubejs.oil_fluid1":"粗矿沉淀液",
+    "fluid.kubejs.oil_fluid2":"精矿沉淀液",
+    "fluid.kubejs.oil_fluid3":"粉尘凝结液",
+    "fluid.kubejs.used_oil_fluid":"烧尽的油料",
+    "fluid.kubejs.remake_oil_fluid":"提纯后的废油",
+    "block.kubejs.lpg_steel_casing":"油气浸洗机壳",
+    "block.kubejs.oil_cobblestone":"废油圆石"
 }

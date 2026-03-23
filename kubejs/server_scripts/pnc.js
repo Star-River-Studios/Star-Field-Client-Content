@@ -29,6 +29,22 @@ ServerEvents.recipes( event =>{
   assembly_laser("kubejs:supreme_control_circuit_unfinished",2,"mekanism_extras:supreme_control_circuit",8)
   assembly_laser("kubejs:cosmic_control_circuit_unfinished",2,"mekanism_extras:cosmic_control_circuit",8)
   assembly_laser("kubejs:absolute_control_circuit_unfinished",2,"mekanism_extras:absolute_control_circuit",8)
+   event.custom({
+  "type": "pneumaticcraft:pressure_chamber",
+  "inputs": [
+    {
+      "count": 2,
+      "item": 'minecraft:blue_ice'
+    }
+  ],
+  "pressure": 2.0,
+  "results": [
+    {
+      "count": 1,
+      "id": 'powah:dry_ice'
+    }
+  ]
+})
     event.custom({//炽热血制备
       "type": "pneumaticcraft:thermo_plant",
   "inputs": {
@@ -73,29 +89,29 @@ ServerEvents.recipes( event =>{
     "min": 623
   }
     })
-  event.custom({//合金灌注
-      "type": "pneumaticcraft:thermo_plant",
-  "inputs": {
-    "fluid": {
-      "amount": 100,
-      "fluid": "kubejs:alloy_infuser_fluid"
-    },
-    "item": {
-      "item": "minecraft:copper_ingot",
-      "count":1
-    }
-  },
-  "outputs": {
-    "item_output": {
-      "count": 1,
-      "id": 'mekanism:alloy_infused'
-    }
-  },
-  "pressure": 1.0,
-  "temperature": {
-    "min": 323
-  }
-    })
+  //event.custom({//合金灌注
+  //    "type": "pneumaticcraft:thermo_plant",
+  //"inputs": {
+  //  "fluid": {
+  //    "amount": 100,
+  //    "fluid": "kubejs:alloy_infuser_fluid"
+  //  },
+  //  "item": {
+  //    "item": "minecraft:copper_ingot",
+  //    "count":1
+  //  }
+  //},
+  //"outputs": {
+  //  "item_output": {
+  //    "count": 1,
+  //    "id": 'mekanism:alloy_infused'
+  //  }
+  //},
+  //"pressure": 1.0,
+  //"temperature": {
+  //  "min": 323
+  //}
+  //  })
   event.custom({
   "type": "pneumaticcraft:fluid_mixer",
   "fluid_output": {
@@ -117,6 +133,85 @@ ServerEvents.recipes( event =>{
   "pressure": 1,
   "time": 40
 })
+ event.custom({
+  "type": "pneumaticcraft:fluid_mixer",
+  "fluid_output": {
+    "amount": 1000,
+    "id": "kubejs:oil_fluid1"
+  },
+  "input1": {
+    "amount": 500,
+    "tag": 'c:crude_oil'
+  },
+  "input2": {
+    "amount": 500,
+    "fluid": "minecraft:lava"
+  },
+  "item_output":{},
+  "pressure": 2,
+  "time": 20
+})
+function oil_fluid_mixer(fluid_output,item_output,fluid){
+  event.custom({
+  "type": "pneumaticcraft:fluid_mixer",
+  "fluid_output": {
+    "amount": 1000,
+    "id": fluid_output
+  },
+  "input1": {
+    "amount": 500,
+    "fluid": fluid
+  },
+  "input2": {
+    "amount": 500,
+    "fluid": "minecraft:lava"
+  },
+  "item_output": {
+    "count": 1,
+    "id": item_output
+  },
+  "pressure": 2,
+  "time": 20
+})
+}
+ oil_fluid_mixer("kubejs:oil_fluid2","kubejs:dirty_ore_powder","kubejs:oil_fluid1")
+ oil_fluid_mixer("kubejs:oil_fluid3","kubejs:dirty_ore1_powder","kubejs:oil_fluid2")
+ oil_fluid_mixer("kubejs:used_oil_fluid","kubejs:dirty_ore2_powder","kubejs:oil_fluid3")
+function oil_thermo_plant(fluid_output,item_output,fluid_input,item_input,item_count){
+  event.custom({
+      "type": "pneumaticcraft:thermo_plant",
+  "inputs": {
+    "fluid": {
+      "amount": 500,
+      "fluid": fluid_input
+    },
+    "item": {
+      "item": item_input,
+      "count":1
+    }
+  },
+  "outputs": {
+    "item_output": {
+      "count": item_count,
+      "id": item_output
+    },
+    "fluid_output": {
+      "amount": 500,
+      "id": fluid_output
+    }
+  },
+  "pressure": 4.0,
+  "temperature": {
+    "min": 673
+  }
+    })
+}
+ oil_thermo_plant("kubejs:oil_fluid2","kubejs:dirty_ore_powder","kubejs:oil_fluid1",'immersiveengineering:slag',4)
+ oil_thermo_plant("kubejs:oil_fluid3","kubejs:dirty_ore1_powder","kubejs:oil_fluid2",'immersiveengineering:slag',4)
+ oil_thermo_plant("kubejs:used_oil_fluid","kubejs:dirty_ore2_powder","kubejs:oil_fluid3",'immersiveengineering:slag',4)
+ oil_thermo_plant("kubejs:oil_fluid2","kubejs:dirty_ore_powder","kubejs:oil_fluid1",'immersiveengineering:dust_hop_graphite',8)
+ oil_thermo_plant("kubejs:oil_fluid3","kubejs:dirty_ore1_powder","kubejs:oil_fluid2",'immersiveengineering:dust_hop_graphite',8)
+ oil_thermo_plant("kubejs:used_oil_fluid","kubejs:dirty_ore2_powder","kubejs:oil_fluid3",'immersiveengineering:dust_hop_graphite',8)
   event.custom({//树脂冷却成树脂板
   "type": "pneumaticcraft:heat_frame_cooling",
   "bonusLimit": 0.75,
